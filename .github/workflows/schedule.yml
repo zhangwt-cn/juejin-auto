@@ -1,0 +1,24 @@
+name: schedule
+
+on:
+  schedule:
+  # UTC 时间 1 点运行一次
+    - cron: '0 1 * * *'
+
+jobs:
+
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+    
+    - name: get dir
+      run: ls -l
+    
+    - name: run
+      run: go run main.go

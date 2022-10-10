@@ -4,6 +4,8 @@ on:
   schedule:
   # UTC 时间 1 点运行一次
     - cron: '0 8 * * *'
+  workflow_dispatch:
+    
 
 jobs:
 

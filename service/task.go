@@ -79,6 +79,9 @@ func juejinReq(method, url, cookie string) model.Resp {
 
 // msg 组装
 func msg(config model.Config) string{
+	if config.Cookie == "" {
+		return "未配置掘金 token"
+	}
 	return checkIn(config) + oreTotal(config) + checkInTotal(config)
 }
 

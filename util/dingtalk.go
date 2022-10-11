@@ -28,6 +28,11 @@ const(
 // token bot token
 // 发送消息
 func SendMsg(token, msg, msgType string){
+	if token == "" {
+		log.Println("未配置 dingtalk bot token !")
+		return
+	}
+
 	botUrl := "https://oapi.dingtalk.com/robot/send?access_token=" + token
 	data := fmt.Sprintf(JSON, msgType, msg, msg)
 	resp, _ := http.Post(botUrl, "application/json", strings.NewReader(data))

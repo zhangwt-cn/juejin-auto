@@ -11,7 +11,8 @@ import (
 
 func main() {
 	//定义一个结构体变量
-	var config model.Config  
+	var config model.Config 
+	log.Println(os.Getenv("JUEJIN_COOKIE")) 
 
 	// 读取yaml文件
 	byteArr, err := os.ReadFile("config.yaml")

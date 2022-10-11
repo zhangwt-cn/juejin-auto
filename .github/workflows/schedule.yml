@@ -19,4 +19,6 @@ jobs:
         go-version: 1.18
     
     - name: run sign in 
+      env:
+        JUEJIN_COOKIE: ${{ secrets.JUEJIN_COOKIE }}
       run: go run main.go

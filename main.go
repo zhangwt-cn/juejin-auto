@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
-	config := model.Config{Cookie: os.Getenv("JUEJIN_COOKIE")}
-	service.CheckIn(config)
+	config := model.Config{
+		Cookie: os.Getenv("JUEJIN_COOKIE"),
+		DingtalkBotToken: os.Getenv("DINGTALK_BOT_TOKEN"),
+	}
+	service.Task(config)
 }

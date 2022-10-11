@@ -3,5 +3,9 @@ package model
 
 // Config 对象
 type Config struct {
-	Cookie     string        // cookie
+	// 掘金 cookie
+	Cookie     string
+
+	// dingtalk bot token
+	DingtalkBotToken string
 }

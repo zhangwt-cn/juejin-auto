@@ -25,4 +25,5 @@ jobs:
       env:
         JUEJIN_COOKIE: ${{ secrets.JUEJIN_COOKIE }}
         DINGTALK_BOT_TOKEN: ${{ secrets.DINGTALK_BOT_TOKEN }}
+        SERVER_CHAN_TOKEN: ${{ secrets.SERVER_CHAN_TOKEN }}
       run: go run main.go

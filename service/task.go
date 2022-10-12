@@ -25,8 +25,10 @@ func checkIn(config model.Config) string {
 }
 
 // 通知
-func notice(token, msg string){
-	util.SendMsg(token, util.MARKDOWN_TEXT + msg, util.MARKDOWN)
+func notice(config model.Config, msg string){
+	sendMsg := util.MARKDOWN_TEXT + msg
+	util.SendDingtalkMsg(config.DingtalkBotToken, sendMsg, util.MARKDOWN)
+	util.SendServerChanMsg(config.ServerChanToken, sendMsg)
 }
 
 // 获取账户矿石信息
@@ -88,7 +90,7 @@ func msg(config model.Config) string{
 
 // 掘金任务
 func Task(config model.Config){
-	notice(config.DingtalkBotToken, msg(config))
+	notice(config, msg(config))
 }
 
 

@@ -8,4 +8,7 @@ type Config struct {
 
 	// dingtalk bot token
 	DingtalkBotToken string
+
+	// server chan token
+	ServerChanToken string
 }

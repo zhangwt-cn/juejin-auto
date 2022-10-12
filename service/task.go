@@ -16,7 +16,8 @@ func checkIn(config model.Config) string {
 	respone := juejinReq(util.POST, url, config.Cookie)
 	var msg string
 	if respone.ErrNo == 0 {
-		msg = "  \n  - \u2705 签到成功！"
+		dataMap := respone.Data.(map[string]interface{})
+		msg = fmt.Sprintf("  \n  - \u2705 签到成功，\U0001f38a 获得 **%v** 矿石～", dataMap["incr_point"])
 	} else {
 		msg = "  \n  - \u274E 签到失败！ \n - \u2B07\uFE0F 失败原因：  \n > " + respone.ErrMsg
 	}

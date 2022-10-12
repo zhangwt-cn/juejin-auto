@@ -53,7 +53,8 @@ func SendServerChanMsg(token, msg string){
 	}
 	serverChanUrl := fmt.Sprintf("https://sctapi.ftqq.com/%s.send", token)
 	data := fmt.Sprintf(SERVER_CHAN_JSON, msg) 
+	log.Printf("server chan req: %s" , data)
 	resp, _ := http.Post(serverChanUrl, "application/json", strings.NewReader(data))
 	byteArr, _ := ioutil.ReadAll(resp.Body)
-	log.Printf("server chan return：%s" ,string(byteArr))
+	log.Printf("server chan return：%s", string(byteArr))
 }

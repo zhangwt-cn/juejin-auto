@@ -34,7 +34,7 @@ const(
 // 发送消息
 func SendDingtalkMsg(token, msg, msgType string){
 	if token == "" {
-		log.Println("未配置 dingtalk bot token !")
+		log.Println("未配置 dingtalk bot token 取消dingtalk推送!")
 		return
 	}
 
@@ -48,11 +48,11 @@ func SendDingtalkMsg(token, msg, msgType string){
 // 发送 server chan 消息通知
 func SendServerChanMsg(token, msg string){
 	if token == "" {
-		log.Println("未配置 server chan token!")
+		log.Println("未配置 server chan token 取消server chan推送!")
 		return
 	}
 	serverChanUrl := fmt.Sprintf("https://sctapi.ftqq.com/%s.send", token)
-	data := fmt.Sprintf(SERVER_CHAN_JSON, msg) 
+	data := fmt.Sprintf(SERVER_CHAN_JSON, strings.ReplaceAll(msg, "\n", "\\n")) 
 	log.Printf("server chan req: %s" , data)
 	resp, _ := http.Post(serverChanUrl, "application/json", strings.NewReader(data))
 	byteArr, _ := ioutil.ReadAll(resp.Body)

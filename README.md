@@ -11,7 +11,8 @@
 1. 首先需要将项目 `fork` 到自己的 `github` 仓库中
 2. 进入项目主页点击 `Settings` > `Security` > `Secrets` > `Actions`  配置信息
   - 配置掘金 `cookie`: key 配置为 `JUEJIN_COOKIE`，value 填入从掘金网站获取的cookie
-  - 配置钉钉机器人 `token`： key 配置为 `DINGTALK_BOT_TOKEN`，value 填入从钉钉机器人 token
+  - 配置钉钉机器人 `token`： key 配置为 `DINGTALK_BOT_TOKEN`，value 填入钉钉机器人 token
+  - 配置Server酱微信公众号 `token`： key 配置为 `SERVER_CHAN_TOKEN`，value 填入Server酱token
 3. 定时任务配置了每天9点运行，但是由于 github actions 并不准时，大概在12点左右才能执行
 
     

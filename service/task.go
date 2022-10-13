@@ -29,6 +29,7 @@ func notice(config model.Config, msg string){
 	sendMsg := util.MARKDOWN_TEXT + msg
 	util.SendDingtalkMsg(config.DingtalkBotToken, sendMsg, util.MARKDOWN)
 	util.SendServerChanMsg(config.ServerChanToken, sendMsg)
+	util.SendTelegramMsg(config.TelegramBotToken, config.ChatId, msg)
 }
 
 // 获取账户矿石信息

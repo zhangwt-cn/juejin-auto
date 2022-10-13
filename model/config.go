@@ -11,4 +11,10 @@ type Config struct {
 
 	// server chan token
 	ServerChanToken string
+
+	// Telegram bot token
+	TelegramBotToken string
+
+	// Telegram chatId
+	ChatId string
 }

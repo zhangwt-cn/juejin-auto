@@ -26,4 +26,6 @@ jobs:
         JUEJIN_COOKIE: ${{ secrets.JUEJIN_COOKIE }}
         DINGTALK_BOT_TOKEN: ${{ secrets.DINGTALK_BOT_TOKEN }}
         SERVER_CHAN_TOKEN: ${{ secrets.SERVER_CHAN_TOKEN }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: go run main.go

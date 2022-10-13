@@ -26,6 +26,12 @@ const(
 		"desp": "%s",
 		"channel": "9"
 	}`
+	TELEGRAM_JSON = `{
+		"token":"%s",
+		"msgText":"%s",
+		"chatId":%s
+	}`
+	
 )
 
 
@@ -57,4 +63,18 @@ func SendServerChanMsg(token, msg string){
 	resp, _ := http.Post(serverChanUrl, "application/json", strings.NewReader(data))
 	byteArr, _ := ioutil.ReadAll(resp.Body)
 	log.Printf("server chan return：%s", string(byteArr))
+}
+
+// 发送 Telegram 消息通知
+func SendTelegramMsg(token, chatId, msg string){
+	if token == "" || chatId == "" {
+		log.Println("未配置 Telegram token chatId 取消 Telegram 消息通知推送!")
+		return
+	}
+
+	tgUrl := "https://tg-msg.vercel.app/api/tgNotify"
+	data := fmt.Sprintf(TELEGRAM_JSON, token, strings.ReplaceAll(msg, "\n", "\\n"), chatId) 
+	resp, _ := http.Post(tgUrl, "application/json", strings.NewReader(data))
+	byteArr, _ := ioutil.ReadAll(resp.Body)
+	log.Printf("Telegram return：%s", string(byteArr))
 }

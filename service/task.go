@@ -77,7 +77,7 @@ func checkInTotal(config model.Config) (string, string){
 
 // 掘金免费抽奖
 func draw(config model.Config) (string, string) {
-	myLuck := "https://api.juejin.cn/growth_api/v1/lottery_lucky/my_lucky?aid=2608&uuid=6897007117560350216&spider=0"
+	myLuck := "https://api.juejin.cn/growth_api/v1/lottery_config/get"
 	luckResp := juejinReq(http.MethodPost, myLuck, config.Cookie)
 	var markdownMsg string
 	var textMsg string
@@ -87,8 +87,8 @@ func draw(config model.Config) (string, string) {
 		return markdownMsg, textMsg
 	}
 	luckRespData := luckResp.Data.(map[string]interface{})
-	if luckRespData["history_show"].(float64) == 0 {
-		markdownMsg = "  \n  - 免费抽奖次数为0，取消抽奖！ > "
+	if luckRespData["free_count"].(float64) == 0 {
+		markdownMsg = "  \n  - 免费抽奖次数为0，取消抽奖！"
 		textMsg = "\n 免费抽奖次数为0，取消抽奖！" 
 		return markdownMsg, textMsg
 	}

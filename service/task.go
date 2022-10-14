@@ -21,7 +21,8 @@ func checkIn(config model.Config) (string, string) {
 		markdownMsg = fmt.Sprintf("  \n  - \u2705 签到成功，\U0001f38a 获得 **%v** 矿石～", dataMap["incr_point"])
 		textMsg = fmt.Sprintf("\n\u2705 签到成功，\U0001f38a 获得 **%v** 矿石～", dataMap["incr_point"])
 	} else {
-		markdownMsg = "\n\u274E 签到失败！\n\u2B07\uFE0F 失败原因：  \n    " + respone.ErrMsg
+		markdownMsg = "\n - \u274E 签到失败！\n -  \u2B07\uFE0F 失败原因：  \n    > " + respone.ErrMsg
+		textMsg = "\n\u274E 签到失败！\n\u2B07\uFE0F 失败原因：  \n" + respone.ErrMsg
 	}
 	return markdownMsg, textMsg
 }
@@ -45,7 +46,7 @@ func oreTotal(config model.Config) (string, string){
 		markdownMsg = fmt.Sprintf("  \n  - \U0001f389 当前矿石：**%v**", respone.Data)
 		textMsg = fmt.Sprintf("\n\U0001f389 当前矿石：**%v**", respone.Data)
 	} else {
-		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取当前矿石数量失败  \n - \u2B07\uFE0F 失败原因：  \n > %s", respone.ErrMsg)
+		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取当前矿石数量失败  \n - \u2B07\uFE0F 失败原因：  \n    > %s", respone.ErrMsg)
 		textMsg = fmt.Sprintf("\n\u274E 获取当前矿石数量失败  \n\u2B07\uFE0F 失败原因：  \n    %s", respone.ErrMsg)
 	}
 	return markdownMsg, textMsg
@@ -66,7 +67,7 @@ func checkInTotal(config model.Config) (string, string){
 		markdownMsg = fmt.Sprintf("  \n  - \U0001f389 连续签到 **%v** 天, 累计签到 **%v** 天", cont_count, sum_count)
 		textMsg = fmt.Sprintf("\n\U0001f389 连续签到 **%v** 天, 累计签到 **%v** 天", cont_count, sum_count)
 	} else {
-		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取签到信息失败!  \n - \u2B07\uFE0F 失败原因：  \n > %s", respone.ErrMsg)
+		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取签到信息失败!  \n - \u2B07\uFE0F 失败原因：  \n    > %s", respone.ErrMsg)
 		textMsg = fmt.Sprintf("\n\u274E 获取签到信息失败!  \n\u2B07\uFE0F 失败原因：  \n    %s", respone.ErrMsg)
 	}
 	return markdownMsg, textMsg

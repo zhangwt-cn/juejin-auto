@@ -71,7 +71,7 @@ func SendTelegramMsg(token, chatId, msg string){
 		log.Println("未配置 Telegram token chatId 取消 Telegram 消息通知推送!")
 		return
 	}
-
+	log.Printf("Telegram send:%s", msg)
 	tgUrl := "https://tg-msg.vercel.app/api/tgNotify"
 	data := fmt.Sprintf(TELEGRAM_JSON, token, strings.ReplaceAll(msg, "\n", "\\n"), chatId) 
 	resp, _ := http.Post(tgUrl, "application/json", strings.NewReader(data))

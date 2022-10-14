@@ -78,7 +78,7 @@ func checkInTotal(config model.Config) (string, string){
 // 掘金免费抽奖
 func draw(config model.Config) (string, string) {
 	myLuck := "https://api.juejin.cn/growth_api/v1/lottery_config/get"
-	luckResp := juejinReq(http.MethodPost, myLuck, config.Cookie)
+	luckResp := juejinReq(http.MethodGet, myLuck, config.Cookie)
 	var markdownMsg string
 	var textMsg string
 	if luckResp.ErrNo != 0 {

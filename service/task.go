@@ -87,7 +87,7 @@ func draw(config model.Config) (string, string) {
 		return markdownMsg, textMsg
 	}
 	luckRespData := luckResp.Data.(map[string]interface{})
-	if luckRespData["history_show"].(int) == 0 {
+	if luckRespData["history_show"].(float64) == 0 {
 		markdownMsg = "  \n  - 免费抽奖次数为0，取消抽奖！ > "
 		textMsg = "\n 免费抽奖次数为0，取消抽奖！" 
 		return markdownMsg, textMsg

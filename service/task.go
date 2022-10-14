@@ -21,8 +21,8 @@ func checkIn(config model.Config) (string, string) {
 		markdownMsg = fmt.Sprintf("  \n  - \u2705 签到成功，\U0001f38a 获得 **%v** 矿石～", dataMap["incr_point"])
 		textMsg = fmt.Sprintf("\n\u2705 签到成功，\U0001f38a 获得 **%v** 矿石～", dataMap["incr_point"])
 	} else {
-		markdownMsg = "\n - \u274E 签到失败！\n -  \u2B07\uFE0F 失败原因：  \n    > " + respone.ErrMsg
-		textMsg = "\n\u274E 签到失败！\n\u2B07\uFE0F 失败原因：  \n" + respone.ErrMsg
+		markdownMsg = "  \n  - \u274E 签到失败！ \n - \u2B07\uFE0F 失败原因：  \n > " + respone.ErrMsg
+		textMsg = "\n\u274E 签到失败！\n\u2B07\uFE0F 失败原因：  \n    " + respone.ErrMsg
 	}
 	return markdownMsg, textMsg
 }

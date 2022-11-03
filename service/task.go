@@ -10,7 +10,6 @@ import (
 	"net/http"
 )
 
-
 func checkIn(config model.Config) (string, string) {
 	// 签到接口  url
 	var url = "https://api.juejin.cn/growth_api/v1/check_in"
@@ -29,16 +28,16 @@ func checkIn(config model.Config) (string, string) {
 }
 
 // 通知
-func notice(config model.Config, markdownMsg, textMsg string){
-	sendMsg := util.MARKDOWN_TEXT + markdownMsg
-	sendTextMsg := util.TEXT_CONTENT + textMsg
-	util.SendDingtalkMsg(config.DingtalkBotToken, sendMsg, util.MARKDOWN)
+func notice(config model.Config, markdownMsg, textMsg string) {
+	sendMsg := util.MarkdownText + markdownMsg
+	sendTextMsg := util.TextContent + textMsg
+	util.SendDingTalkMsg(config.DingTalkBotToken, sendMsg, util.MARKDOWN)
 	util.SendServerChanMsg(config.ServerChanToken, sendMsg)
 	util.SendTelegramMsg(config.TelegramBotToken, config.ChatId, sendTextMsg)
 }
 
 // 获取账户矿石信息
-func oreTotal(config model.Config) (string, string){
+func oreTotal(config model.Config) (string, string) {
 	checkTotalUrl := "https://api.juejin.cn/growth_api/v1/get_cur_point?aid=2608&uuid=6897007117560350216&spider=0"
 	respone := juejinReq(util.GET, checkTotalUrl, config.Cookie)
 	var markdownMsg string
@@ -53,10 +52,8 @@ func oreTotal(config model.Config) (string, string){
 	return markdownMsg, textMsg
 }
 
-
-
 // 获取账户签到信息
-func checkInTotal(config model.Config) (string, string){
+func checkInTotal(config model.Config) (string, string) {
 	checkTotalUrl := "https://api.juejin.cn/growth_api/v1/get_counts?aid=2608&uuid=6897007117560350216&spider=0"
 	respone := juejinReq(util.GET, checkTotalUrl, config.Cookie)
 	var markdownMsg string
@@ -74,7 +71,6 @@ func checkInTotal(config model.Config) (string, string){
 	return markdownMsg, textMsg
 }
 
-
 // 掘金免费抽奖
 func draw(config model.Config) (string, string) {
 	myLuck := "https://api.juejin.cn/growth_api/v1/lottery_config/get"
@@ -89,7 +85,7 @@ func draw(config model.Config) (string, string) {
 	luckRespData := luckResp.Data.(map[string]interface{})
 	if luckRespData["free_count"].(float64) == 0 {
 		markdownMsg = "  \n  - 免费抽奖次数为0，取消抽奖！"
-		textMsg = "\n 免费抽奖次数为0，取消抽奖！" 
+		textMsg = "\n 免费抽奖次数为0，取消抽奖！"
 		return markdownMsg, textMsg
 	}
 	// 抽奖
@@ -106,8 +102,6 @@ func draw(config model.Config) (string, string) {
 	return markdownMsg, textMsg
 }
 
-
-
 // 掘金接口请求
 func juejinReq(method, url, cookie string) model.Resp {
 	headMap := map[string]string{
@@ -118,15 +112,18 @@ func juejinReq(method, url, cookie string) model.Resp {
 		log.Fatal("掘金接口请求异常", err)
 	}
 	defer resp.Body.Close()
-	var respone model.Resp
+	var response model.Resp
 	data, _ := ioutil.ReadAll(resp.Body)
 	log.Println(string(data))
-	json.Unmarshal([]byte(string(data)), &respone)
-	return respone
+	jsonErr := json.Unmarshal(data, &response)
+	if jsonErr != nil {
+		return model.Resp{}
+	}
+	return response
 }
 
 // msg 组装
-func msg(config model.Config) (string, string){
+func msg(config model.Config) (string, string) {
 	markdownMsg, textMsg := checkIn(config)
 	oreMarkdownMsg, oreTextMsg := oreTotal(config)
 	checkInTotalMarkdownMsg, checkInTotalTextMsg := checkInTotal(config)
@@ -134,14 +131,8 @@ func msg(config model.Config) (string, string){
 	return markdownMsg + oreMarkdownMsg + checkInTotalMarkdownMsg + drawMsg, textMsg + oreTextMsg + checkInTotalTextMsg + drawTextMsg
 }
 
-// 掘金任务
-func Task(config model.Config){
+// Task 掘金任务
+func Task(config model.Config) {
 	markdownMsg, textMsg := msg(config)
 	notice(config, markdownMsg, textMsg)
 }
-
-
-
-
-
-

@@ -39,15 +39,15 @@ func notice(config model.Config, markdownMsg, textMsg string) {
 // 获取账户矿石信息
 func oreTotal(config model.Config) (string, string) {
 	checkTotalUrl := "https://api.juejin.cn/growth_api/v1/get_cur_point?aid=2608&uuid=6897007117560350216&spider=0"
-	respone := juejinReq(util.GET, checkTotalUrl, config.Cookie)
+	response := juejinReq(util.GET, checkTotalUrl, config.Cookie)
 	var markdownMsg string
 	var textMsg string
-	if respone.ErrNo == 0 {
-		markdownMsg = fmt.Sprintf("  \n  - \U0001f389 当前矿石：**%v**", respone.Data)
-		textMsg = fmt.Sprintf("\n\U0001f389 当前矿石：**%v**", respone.Data)
+	if response.ErrNo == 0 {
+		markdownMsg = fmt.Sprintf("  \n  - \U0001f389 当前矿石：**%v**", response.Data)
+		textMsg = fmt.Sprintf("\n\U0001f389 当前矿石：**%v**", response.Data)
 	} else {
-		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取当前矿石数量失败  \n - \u2B07\uFE0F 失败原因：  \n    > %s", respone.ErrMsg)
-		textMsg = fmt.Sprintf("\n\u274E 获取当前矿石数量失败  \n\u2B07\uFE0F 失败原因：  \n    %s", respone.ErrMsg)
+		markdownMsg = fmt.Sprintf("  \n  - \u274E 获取当前矿石数量失败  \n - \u2B07\uFE0F 失败原因：  \n    > %s", response.ErrMsg)
+		textMsg = fmt.Sprintf("\n\u274E 获取当前矿石数量失败  \n\u2B07\uFE0F 失败原因：  \n    %s", response.ErrMsg)
 	}
 	return markdownMsg, textMsg
 }

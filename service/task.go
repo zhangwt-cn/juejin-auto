@@ -3,13 +3,14 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"juejin-auto/model"
 	"juejin-auto/util"
 	"log"
 	"net/http"
 )
 
+// checkIn 签到
 func checkIn(config model.Config) (string, string) {
 	// 签到接口  url
 	var url = "https://api.juejin.cn/growth_api/v1/check_in"
@@ -113,7 +114,7 @@ func juejinReq(method, url, cookie string) model.Resp {
 	}
 	defer resp.Body.Close()
 	var response model.Resp
-	data, _ := ioutil.ReadAll(resp.Body)
+	data, _ := io.ReadAll(resp.Body)
 	log.Println(string(data))
 	jsonErr := json.Unmarshal(data, &response)
 	if jsonErr != nil {

@@ -1,12 +1,12 @@
 name: schedule
 
 on:
-  schedule:
-  # UTC 时间 1 点运行一次
-    - cron: '0 1 * * *'
-  push:
-    branches:
-      - 'main'
+#   schedule:
+#   # UTC 时间 1 点运行一次
+#     - cron: '0 1 * * *'
+#   push:
+#     branches:
+#       - 'main'
   workflow_dispatch:
     
 
